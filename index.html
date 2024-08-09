@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png">
+    <title>Music App</title>
+</head>
+
+<body>
+    <div class="footer">
+        Made By Uğur Kocaman
+    </div>
+    <div class="card">
+        <div class="music-list-container">
+            <h2>Sıraya Eklenen Şarkılar</h2>
+            <div class="queue-music-list">
+                <!-- <div class="item">
+                    <p class="item-info">Lorem ipsum dolor sit amet.</p>
+                    <button id="remove-queue"><ion-icon name="close"></ion-icon></ion-icon></button>
+                </div>
+                <div class="item">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <button id="remove-queue"><ion-icon name="close"></ion-icon></ion-icon></button>
+                </div>
+                <div class="item">
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <button id="remove-queue"><ion-icon name="close"></ion-icon></ion-icon></button>
+                </div> -->
+            </div>
+        </div>
+        <header>
+            <button class="header-button" id="close"><ion-icon name="albums"></ion-icon></ion-icon></button>
+            <p>Şimdi Oynatılıyor</p>
+            <button class="header-button song-list"><ion-icon name="list-outline"></ion-icon></button>
+        </header>
+        <div class="music-content">
+            <img src="Sources/img1.jpg" id="music-image">
+            <h2 id="name">Seni Kendime Sakladım</h2>
+            <p id="artist">Duman</p>
+        </div>
+        <div class="progress">
+            <div class="time">
+                <span class="current-time">0:00</span>
+                <span class="duration">0:00</span>
+            </div>
+            <div class="progress-area">
+                <div class="progress-bar"></div>
+                <audio src="Sources/music1.mp3" id="music"></audio>
+            </div>
+            <div class="volume">
+                <div class="volume-icon"><ion-icon name="volume-high-outline"></ion-icon></div>
+                <input type="range" name="" id="volume-slider" min="0" max="100" value="100">
+            </div>
+            <!-- <div class="slider-section">
+                <input type="range" class="slider" id="" min="0" max="100" value="0">
+                <div class="slider-thumb"></div>
+                <div class="slider-progress"></div>
+            </div> -->
+        </div>
+        <div class="control">
+            <button class="control-button" id="previous" title="Önceki Şarkı"><ion-icon
+                    name="play-skip-back"></ion-icon></button>
+            <button class="control-button shuffle" id="shuffle" title="Karışık çalmayı etkinleştir."><ion-icon
+                    name="shuffle"></ion-icon></button>
+            <button class="play" title="Oynat"><ion-icon name="play"></ion-icon></button>
+            <button class="play pause" id="pause" title="Duraklat"><ion-icon name="pause"></ion-icon></button>
+            <button class="control-button repeat" id="repeat" title="Tekrarlamayı etkinleştir."><ion-icon
+                    name="repeat"></ion-icon></button>
+            <button class="control-button" id="next" title="Sonraki Şarkı"><ion-icon
+                    name="play-skip-forward"></ion-icon></button>
+        </div>
+        <div class="music-list">
+            <!-- <div class="music-member">
+                <div class="music-class">
+                    <div class="img-box">
+                        <img src="Sources/img1.jpg" alt="">
+                        <ion-icon name="play"></ion-icon>
+                    </div>
+                    <div class="music-content">
+                        <h2 id="name">Seni Kendime Sakladım</h2>
+                        <p id="artist">Duman</p>
+                    </div>
+                </div>
+                <button class="control-button" id="queue-btn"><ion-icon name="add-circle"></ion-icon></button>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="popup">Çalma sırasına eklendi.</div>
+    <script src="allMusics.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="scriptCopy.js"></script>
+</body>
+
+</html>
