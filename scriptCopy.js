@@ -19,6 +19,7 @@ let queueList = [];
 let queueIndex = 0;
 let lastMusic;
 let protectIndex = 1;
+let deneme;
 
 window.addEventListener("load", () => {
     loadMusic(musicIndex);
@@ -144,6 +145,7 @@ function playMusic() {
     music.play();
     playButton.style.display = "none";
     pause.style.display = "flex";
+    deneme = musicIndex;
 }
 
 function pauseMusic() {
@@ -407,20 +409,42 @@ function createQueueItem() {
         div.appendChild(button);
         queueMusicList.appendChild(div);
     });
-    let allRemoveBtn = document.querySelectorAll("#remove-queue");
-    allRemoveBtn.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
-            btn.remove();
-            queueList.splice(index, 1);
-            queueArr.splice(index, 1);
-            console.log(index);
-            console.log(queueList);
-            console.log(queueArr);
-            if (queueArr.length == 0) {
-                queueCheck = false;
-                musicIndex = protectIndex;
-                console.log(musicIndex);
-            }
-        });
-    });
+    // allRemoveBtn.forEach((btn, index) => {
+    //     btn.addEventListener("click", () => {
+    //         btn.remove();
+    //         queueList.splice(index, 1);
+    //         queueArr.splice(index, 1);
+    //         console.log(index);
+    //         console.log(queueList);
+    //         console.log(queueArr);
+    //         if (queueArr.length == 0) {
+    //             queueCheck = false;
+    //             musicIndex = protectIndex;
+    //             console.log(musicIndex);
+    //         }
+    //     });
+    // });
+    let arrayFromQueueList = Array.from(queueMusicList.children);
+
+    for (let i = 0; i < arrayFromQueueList.length; i++) {
+        arrayFromQueueList[i].value = i;
+        console.log(arrayFromQueueList[i].value);
+    }
+
 }
+let allRemoveBtn = document.querySelectorAll("#remove-queue");
+musicListContainer.addEventListener("click", (e) => {
+    if (e.target.matches("#remove-queue")) {
+        console.log(e.target.parentElement.value);
+        queueArr.splice(e.target.parentElement.value, 1);
+        queueList.splice(e.target.parentElement.value, 1);
+        console.log(queueArr);
+        e.target.parentElement.remove();
+        createQueueItem();
+    }
+    if (queueArr.length == 0) {
+        queueCheck = false;
+        musicIndex = deneme;
+        console.log(musicIndex);
+    }
+});

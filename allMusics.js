@@ -89,6 +89,18 @@ let allMusics = [
         img: "Sources/img15.jpg",
         src: "Sources/music15.mp3"
     },
+    {
+        name: "Fade To Black",
+        artist: "Metallica",
+        img: "Sources/img16.jpg",
+        src: "Sources/music16.mp3"
+    },
+    {
+        name: "Her Şeyi Yak",
+        artist: "Duman",
+        img: "Sources/img17.jpg",
+        src: "Sources/music17.mp3"
+    },
 ];
 let musicList = document.querySelector(".music-list");
 

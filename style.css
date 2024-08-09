@@ -34,7 +34,7 @@ button:active:not(.play) {
 /*  HEADER SECTION START */
 
 .card {
-    width: 1050px;
+    width: 1100px;
     max-width: 85%;
     border-radius: 15px;
     /* border: 3px solid rgba(255, 253, 253, 0.2); */
@@ -490,6 +490,7 @@ h2 {
 #remove-queue {
     width: 20px;
     height: 20px;
+    margin-right: 5px;
     font-size: 18px;
     display: grid;
     place-items: center;
@@ -500,7 +501,7 @@ h2 {
     box-shadow: 2px 0px 1px 1px #778da9;
     cursor: pointer;
     border-radius: 50%;
-    display: none;
+    /* display: none; */
 }
 
 #remove-queue:hover {
