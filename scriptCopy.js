@@ -19,7 +19,7 @@ let queueList = [];
 let queueIndex = 0;
 let lastMusic;
 let protectIndex = 1;
-let deneme;
+let deneme = 1;
 
 window.addEventListener("load", () => {
     loadMusic(musicIndex);
@@ -307,7 +307,7 @@ allQueueBtn.forEach((btn, index) => {
     btn.addEventListener("click", (e) => {
 
         if (index + 1 === queueList[queueList.length - 1]) {
-            alert("Aynı şarkıyı tekrar ekleyemezsiniz.");
+            alert("Aynı müziği tekrar ekleyemezsiniz.");
         }
         else {
             // console.log(protectIndex); BAKABİLİRİM
@@ -441,6 +441,16 @@ musicListContainer.addEventListener("click", (e) => {
         console.log(queueArr);
         e.target.parentElement.remove();
         createQueueItem();
+    }
+    if (e.target.matches("#clear-all-queue")) {
+        if (queueArr.length == 0) {
+            alert("Sırada müzik bulunmamaktadır.");
+        }
+        else {
+            queueArr.splice(0);
+            queueList.splice(0);
+            queueMusicList.innerHTML = "";
+        }
     }
     if (queueArr.length == 0) {
         queueCheck = false;

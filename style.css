@@ -521,6 +521,22 @@ h2 {
     ;
 }
 
+#clear-all-queue {
+    float: right;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 5px;
+    background: none;
+    cursor: pointer;
+    color: rgba(241, 236, 236, 0.473);
+    border: none;
+    outline: none;
+}
+
+#clear-all-queue:hover {
+    text-decoration: 2px underline;
+}
+
 @media (max-width: 500px) {
     .music-list {
         width: 350px;
