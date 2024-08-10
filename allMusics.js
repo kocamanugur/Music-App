@@ -101,6 +101,24 @@ let allMusics = [
         img: "Sources/img17.jpg",
         src: "Sources/music17.mp3"
     },
+    {
+        name: "Arcade",
+        artist: "Duncan Laurence",
+        img: "Sources/img18.png",
+        src: "Sources/music18.mp3"
+    },
+    {
+        name: "Another Love",
+        artist: "Tom Odell",
+        img: "Sources/img19.jpg",
+        src: "Sources/music19.mp3"
+    },
+    {
+        name: "This I Love",
+        artist: "Guns N' Roses",
+        img: "Sources/img20.jpg",
+        src: "Sources/music20.mp3"
+    },
 ];
 let musicList = document.querySelector(".music-list");
 
