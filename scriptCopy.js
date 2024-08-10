@@ -443,7 +443,7 @@ musicListContainer.addEventListener("click", (e) => {
         createQueueItem();
     }
     if (e.target.matches("#clear-all-queue")) {
-        if (queueArr.length == 0) {
+        if (queueArr.length == 0 && queueList.length == 0) {
             alert("Sırada müzik bulunmamaktadır.");
         }
         else {
