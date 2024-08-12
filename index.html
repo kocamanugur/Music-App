@@ -13,6 +13,7 @@
     <div class="footer">
         Made By Uğur Kocaman
     </div>
+
     <div class="card">
         <div class="music-list-container">
             <h2>Sıraya Eklenen Şarkılar</h2>
@@ -34,7 +35,13 @@
         </div>
         <header>
             <button class="header-button" id="close"><ion-icon name="albums"></ion-icon></ion-icon></button>
-            <p>Şimdi Oynatılıyor</p>
+            <!-- <p>Şimdi Oynatılıyor</p> -->
+            <div class="search-box">
+                <label for="search"><ion-icon name="search" class="search-icon"></ion-icon><input type="text"
+                        class="search" spellcheck="false" placeholder="Ne Dinlemek İstiyorsun?"></label>
+                <ion-icon name="close-outline" class="clean-search-btn"></ion-icon>
+            </div>
+            <div class="search-result"></div>
             <button class="header-button song-list"><ion-icon name="list-outline"></ion-icon></button>
         </header>
         <div class="music-content">

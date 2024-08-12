@@ -17,7 +17,7 @@ body {
     gap: 20px;
 }
 
-ion-icon:not(.volume ion-icon) {
+ion-icon:not(.volume ion-icon, .clean-search-btn, .search-icon) {
     pointer-events: none;
 }
 
@@ -35,7 +35,7 @@ button:active:not(.play) {
 
 .card {
     width: 1100px;
-    max-width: 85%;
+    /* max-width: 90%; */
     border-radius: 15px;
     /* border: 3px solid rgba(255, 253, 253, 0.2); */
     text-align: center;
@@ -380,6 +380,7 @@ h2 {
     0% {
         transform: scale(0.96);
     }
+
     50% {
         transform: scale(1);
     }
@@ -436,7 +437,7 @@ h2 {
     padding: 5px;
     color: rgba(241, 236, 236, 0.473);
     font-size: 12px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    /* border-bottom: 2px solid rgba(0, 0, 0, 0.2); */
 }
 
 .music-member {
@@ -537,8 +538,111 @@ h2 {
     text-decoration: 2px underline;
 }
 
+.search-box {
+    width: 400px;
+    z-index: 1;
+    transition: 0.5s;
+    position: relative;
+}
+
+.search-box label {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    color: white;
+    top: 0;
+    font-size: 20px;
+    left: 12px;
+    z-index: 1;
+}
+
+.search-result {
+    position: absolute;
+    top: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1b263b;
+    z-index: 1;
+    width: 400px;
+    padding: 0 10px;
+    height: 0;
+    transition: 0.5s;
+    overflow-y: scroll;
+}
+
+.search-result::-webkit-scrollbar {
+    display: none;
+}
+
+.search {
+    width: 100%;
+    padding: 10px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    border: none;
+    background: #253553;
+    color: white;
+}
+
+.search:hover {
+    outline: 1px solid white;
+    background: #3b4e72c9;
+}
+
+.search:focus {
+    outline: 3px solid white;
+
+}
+
+.clean-search-btn {
+    position: absolute;
+    font-size: 2em;
+    top: 5px;
+    color: white;
+    right: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+.clean-search-btn:hover {
+    transform: scale(1.20);
+}
+
 @media (max-width: 500px) {
     .music-list {
         width: 350px;
+    }
+
+    .search {
+        width: 85%;
+        font-size: 12px;
+    }
+
+    .search-icon {
+        top: 2px;
+    }
+
+    .clean-search-btn {
+        right: 25px;
+        top: 3px;
+    }
+
+    .search-result {
+        width: 350px;
+    }
+
+    .toggle {
+        right: 37px;
+    }
+
+    .music-list-container {
+        width: 370px;
+        left: -380px;
+    }
+
+    .toggle-queue-list {
+        left: 30px;
     }
 }

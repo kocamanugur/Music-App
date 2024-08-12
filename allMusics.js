@@ -119,6 +119,12 @@ let allMusics = [
         img: "Sources/img20.jpg",
         src: "Sources/music20.mp3"
     },
+    {
+        name: "Bu Akşam",
+        artist: "Duman",
+        img: "Sources/img21.jpg",
+        src: "Sources/music21.mp3"
+    },
 ];
 let musicList = document.querySelector(".music-list");
 

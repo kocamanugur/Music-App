@@ -458,3 +458,104 @@ musicListContainer.addEventListener("click", (e) => {
         console.log(musicIndex);
     }
 });
+
+let search = document.querySelector(".search");
+let searchResultBox = document.querySelector(".search-result");
+let cleanSearchBtn = document.querySelector(".clean-search-btn");
+search.addEventListener("keyup", () => {
+    let sonuc = search.value.toLowerCase().trim();
+    console.clear();
+    searchResultBox.innerHTML = "";
+    allMusics.forEach((music, index) => {
+        if (sonuc == "") {
+            searchResultBox.style.height = "0";
+            cleanSearchBtn.style.display = "none";
+        }
+        else if (music.name.toLowerCase().includes(sonuc) || music.artist.toLowerCase().includes(sonuc)) {
+            console.log(music.name);
+            console.log(index);
+            searchResultBox.style.height = "400px";
+            cleanSearchBtn.style.display = "block";
+            createSearchResult(music, index);
+        }
+        else {
+            cleanSearchBtn.style.display = "block";
+        }
+    });
+});
+cleanSearchBtn.addEventListener("click", () => {
+    search.value = "";
+    searchResultBox.style.height = "0";
+    cleanSearchBtn.style.display = "none";
+})
+
+function createSearchResult(song, index) {
+    let musicClass = document.createElement("div");
+    musicClass.setAttribute("class", "music-class");
+    let img = document.createElement("img");
+    img.src = song.img;
+    let musicContent = document.createElement("div");
+    musicContent.setAttribute("class", "music-content");
+    let name = document.createElement("h2");
+    name.setAttribute("id", "name");
+    name.innerHTML = song.name;
+    let imgBox = document.createElement("div");
+    imgBox.setAttribute("class", "img-box");
+    let ionIcon = document.createElement("ion-icon");
+    ionIcon.setAttribute("name", "play");
+    imgBox.appendChild(ionIcon);
+    musicClass.appendChild(imgBox);
+    let p = document.createElement("p");
+    p.setAttribute("id", "artist");
+    let audio = document.createElement("audio");
+    audio.src = song.src;
+    let queueBtn = document.createElement("button");
+    queueBtn.setAttribute("class", "control-button");
+    queueBtn.setAttribute("id", "queue-btn");
+    let ionIconQueue = document.createElement("ion-icon");
+    ionIconQueue.setAttribute("name", "add-circle");
+    queueBtn.appendChild(ionIconQueue);
+    let musicMember = document.createElement("div");
+    musicMember.setAttribute("class", "music-member");
+    musicClass.appendChild(audio);
+    p.innerHTML = song.artist;
+    musicContent.appendChild(name);
+    musicContent.appendChild(p);
+    musicClass.appendChild(img);
+    imgBox.appendChild(img);
+    musicClass.appendChild(musicContent);
+    musicMember.appendChild(musicClass);
+    musicMember.appendChild(queueBtn);
+    searchResultBox.appendChild(musicMember);
+    
+    musicClass.addEventListener("click", () => {
+        musicIndex = index + 1;
+        protectIndex = musicIndex;
+        loadMusic(musicIndex);
+        playMusic();
+    });
+
+    queueBtn.addEventListener("click", (e) => {
+
+        if (index + 1 === queueList[queueList.length - 1]) {
+            alert("Aynı müziği tekrar ekleyemezsiniz.");
+        }
+        else {
+            // console.log(protectIndex); BAKABİLİRİM
+            musicQueueIndex = index + 1;
+            queueList.push(musicQueueIndex);
+            // console.log(queueList); BAKABİLİRİM
+            lastMusic = index + 1;
+            let name = e.target.parentElement.childNodes[0].childNodes[2].childNodes[0].innerText,
+                artist = e.target.parentElement.childNodes[0].childNodes[2].childNodes[1].innerText;
+            getQueueItem(name, artist);
+            createQueueItem();
+            queueCheck = true;
+            popup.style.opacity = "1";
+            setTimeout(() => {
+                popup.style.opacity = "0";
+
+            }, 1500);
+        }
+    });
+}
