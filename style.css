@@ -552,7 +552,7 @@ h2 {
 .search-icon {
     position: absolute;
     color: white;
-    top: 0;
+    top: 1px;
     font-size: 20px;
     left: 12px;
     z-index: 1;
