@@ -462,7 +462,7 @@ musicListContainer.addEventListener("click", (e) => {
 let search = document.querySelector(".search");
 let searchResultBox = document.querySelector(".search-result");
 let cleanSearchBtn = document.querySelector(".clean-search-btn");
-search.addEventListener("keyup", () => {
+search.addEventListener("input", () => {
     let sonuc = search.value.toLowerCase().trim();
     console.clear();
     searchResultBox.innerHTML = "";
