@@ -128,6 +128,9 @@ music.addEventListener("ended", () => {
 });
 listBtn.addEventListener("click", () => {
     musicList.classList.toggle("toggle");
+    if (musicListContainer.classList.contains("toggle-queue-list")) {
+        musicListContainer.classList.remove("toggle-queue-list");
+    }
 });
 
 
@@ -372,6 +375,9 @@ let musicListContainer = document.querySelector(".music-list-container");
 let queueArr = [];
 closeBtn.addEventListener("click", () => {
     musicListContainer.classList.toggle("toggle-queue-list");
+    if (musicList.classList.contains("toggle")) {
+        musicList.classList.remove("toggle");
+    }
 });
 function getQueueItem(name, artist) {
     // let div = document.createElement("div");
