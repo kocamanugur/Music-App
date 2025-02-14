@@ -21,6 +21,11 @@ let lastMusic;
 let protectIndex = 1;
 let deneme = 1;
 
+if (localStorage.getItem("item") != null) {
+    let LSIndex = localStorage.getItem("item");
+    musicIndex = LSIndex;
+}
+
 window.addEventListener("load", () => {
     loadMusic(musicIndex);
 });
@@ -149,6 +154,7 @@ function playMusic() {
     playButton.style.display = "none";
     pause.style.display = "flex";
     deneme = musicIndex;
+    localStorage.setItem("item", musicIndex);
 }
 
 function pauseMusic() {
@@ -533,7 +539,7 @@ function createSearchResult(song, index) {
     musicMember.appendChild(musicClass);
     musicMember.appendChild(queueBtn);
     searchResultBox.appendChild(musicMember);
-    
+
     musicClass.addEventListener("click", () => {
         musicIndex = index + 1;
         protectIndex = musicIndex;
