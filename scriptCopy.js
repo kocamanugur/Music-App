@@ -12,6 +12,9 @@ let Musicduration = document.querySelector(".duration");
 let musicCurrentTime = document.querySelector(".current-time");
 let listBtn = document.querySelector(".header-button.song-list");
 let closeBtn = document.getElementById("close");
+let queueMusicList = document.querySelector(".queue-music-list");
+let repeatBtn = document.getElementById("repeat");
+let shuffleBtn = document.getElementById("shuffle");
 
 let musicIndex = 1;
 let queueCheck = false;
@@ -20,11 +23,14 @@ let queueIndex = 0;
 let lastMusic;
 let protectIndex = 1;
 let deneme = 1;
+let queueArr = [];
 
 if (localStorage.getItem("item") != null) {
     let LSIndex = localStorage.getItem("item");
     musicIndex = LSIndex;
 }
+
+getShuffleRepeatLS();
 
 window.addEventListener("load", () => {
     loadMusic(musicIndex);
@@ -35,6 +41,7 @@ playButton.addEventListener("click", () => {
 pause.addEventListener("click", () => {
     pauseMusic();
 });
+getItemsFromLS();
 nextButton.addEventListener("click", nextMusic);
 previousButton.addEventListener("click", previousMusic);
 music.addEventListener("timeupdate", (e) => {
@@ -69,6 +76,10 @@ progressArea.addEventListener("click", (e) => {
     playMusic();
 });
 music.addEventListener("ended", () => {
+    if (queueList.length <= 0) {
+        queueCheck = false;
+        localStorage.setItem("queueCheck", queueCheck);
+    }
     if (queueCheck) {
         if (repeatBtn.classList.contains("is-repeating")) {
             music.currentTime = 0;
@@ -83,8 +94,10 @@ music.addEventListener("ended", () => {
                     }
                     musicIndex = randIndex;
                     queueList.splice(0);
+                    localStorage.setItem("queueList", JSON.stringify(queueList));
                     queueIndex = 0;
                     queueCheck = false;
+                    localStorage.setItem("queueCheck", queueCheck);
                     loadMusic(musicIndex);
                     playMusic();
                 }
@@ -95,8 +108,10 @@ music.addEventListener("ended", () => {
                     musicIndex > allMusics.length ? musicIndex = 1 : musicIndex = musicIndex;
                     console.log(musicIndex);
                     queueList.splice(0);
+                    localStorage.setItem("queueList", JSON.stringify(queueList));
                     queueIndex = 0;
                     queueCheck = false;
+                    localStorage.setItem("queueCheck", queueCheck);
                     loadMusic(musicIndex);
                     playMusic();
                 }
@@ -109,6 +124,8 @@ music.addEventListener("ended", () => {
                 // queueIndex++;
                 queueList.splice(0, 1);
                 queueArr.splice(0, 1);
+                localStorage.setItem("queueList", JSON.stringify(queueList));
+                localStorage.setItem("queueArr", JSON.stringify(queueArr));
                 createQueueItem();
             }
 
@@ -170,6 +187,10 @@ function pauseMusic() {
 }
 
 function nextMusic() {
+    if (queueList.length <= 0) {
+        queueCheck = false;
+        localStorage.setItem("queueCheck", queueCheck);
+    }
     if (queueCheck) {
         if (repeatBtn.classList.contains("is-repeating")) {
             music.currentTime = 0;
@@ -184,8 +205,10 @@ function nextMusic() {
                     }
                     musicIndex = randIndex;
                     queueList.splice(0);
+                    localStorage.setItem("queueList", JSON.stringify(queueList));
                     queueIndex = 0;
                     queueCheck = false;
+                    localStorage.setItem("queueCheck", queueCheck);
                     loadMusic(musicIndex);
                     playMusic();
                 }
@@ -196,8 +219,10 @@ function nextMusic() {
                     musicIndex > allMusics.length ? musicIndex = 1 : musicIndex = musicIndex;
                     // console.log(musicIndex); BAKABİLİRİM
                     queueList.splice(0);
+                    localStorage.setItem("queueList", JSON.stringify(queueList));
                     queueIndex = 0;
                     queueCheck = false;
+                    localStorage.setItem("queueCheck", queueCheck);
                     loadMusic(musicIndex);
                     playMusic();
                 }
@@ -210,6 +235,8 @@ function nextMusic() {
                 // queueIndex++;
                 queueList.splice(0, 1);
                 queueArr.splice(0, 1);
+                localStorage.setItem("queueList", JSON.stringify(queueList));
+                localStorage.setItem("queueArr", JSON.stringify(queueArr));
                 createQueueItem();
             }
 
@@ -268,18 +295,18 @@ function loadMusic(index) {
     });
 }
 
-let repeatBtn = document.getElementById("repeat");
-let shuffleBtn = document.getElementById("shuffle");
+
 repeatBtn.addEventListener("click", () => {
     let nameOfClass = repeatBtn.classList;
     if (nameOfClass.contains("is-repeating")) {
         nameOfClass.remove("is-repeating");
         repeatBtn.setAttribute("title", "Tekrarlamayı etkinleştir.");
-
+        localStorage.setItem("Repeat", JSON.stringify(false));
     }
     else {
         nameOfClass.add("is-repeating");
         repeatBtn.setAttribute("title", "Tekrarlamayı kapat.");
+        localStorage.setItem("Repeat", JSON.stringify(true));
     }
 });
 shuffleBtn.addEventListener("click", () => {
@@ -287,11 +314,13 @@ shuffleBtn.addEventListener("click", () => {
     if (nameOfClass.contains("is-shuffled")) {
         nameOfClass.remove("is-shuffled");
         shuffleBtn.setAttribute("title", "Karışık çalmayı etkinleştir.");
+        localStorage.setItem("Shuffle", JSON.stringify(false));
 
     }
     else {
         nameOfClass.add("is-shuffled");
         shuffleBtn.setAttribute("title", "Karışık çalmayı kapat.");
+        localStorage.setItem("Shuffle", JSON.stringify(true));
     }
 });
 
@@ -322,13 +351,16 @@ allQueueBtn.forEach((btn, index) => {
             // console.log(protectIndex); BAKABİLİRİM
             musicQueueIndex = index + 1;
             queueList.push(musicQueueIndex);
+            localStorage.setItem("queueList", JSON.stringify(queueList));
             // console.log(queueList); BAKABİLİRİM
             lastMusic = index + 1;
             let name = e.target.parentElement.childNodes[0].childNodes[2].childNodes[0].innerText,
                 artist = e.target.parentElement.childNodes[0].childNodes[2].childNodes[1].innerText;
             getQueueItem(name, artist);
+            localStorage.setItem("queueArr", JSON.stringify(queueArr));
             createQueueItem();
             queueCheck = true;
+            localStorage.setItem("queueCheck", queueCheck);
             popup.style.opacity = "1";
             setTimeout(() => {
                 popup.style.opacity = "0";
@@ -376,9 +408,8 @@ volumeIcon.addEventListener("click", () => {
     }
 });
 
-let queueMusicList = document.querySelector(".queue-music-list");
 let musicListContainer = document.querySelector(".music-list-container");
-let queueArr = [];
+
 closeBtn.addEventListener("click", () => {
     musicListContainer.classList.toggle("toggle-queue-list");
     if (musicList.classList.contains("toggle")) {
@@ -450,6 +481,8 @@ musicListContainer.addEventListener("click", (e) => {
         console.log(e.target.parentElement.value);
         queueArr.splice(e.target.parentElement.value, 1);
         queueList.splice(e.target.parentElement.value, 1);
+        localStorage.setItem("queueList", JSON.stringify(queueList));
+        localStorage.setItem("queueArr", JSON.stringify(queueArr));
         console.log(queueArr);
         e.target.parentElement.remove();
         createQueueItem();
@@ -461,6 +494,8 @@ musicListContainer.addEventListener("click", (e) => {
         else {
             queueArr.splice(0);
             queueList.splice(0);
+            localStorage.setItem("queueList", JSON.stringify(queueList));
+            localStorage.setItem("queueArr", JSON.stringify(queueArr));
             queueMusicList.innerHTML = "";
         }
     }
@@ -468,6 +503,7 @@ musicListContainer.addEventListener("click", (e) => {
         queueCheck = false;
         musicIndex = deneme;
         console.log(musicIndex);
+        localStorage.setItem("queueCheck", queueCheck);
     }
 });
 
@@ -556,13 +592,16 @@ function createSearchResult(song, index) {
             // console.log(protectIndex); BAKABİLİRİM
             musicQueueIndex = index + 1;
             queueList.push(musicQueueIndex);
+            localStorage.setItem("queueList", JSON.stringify(queueList));
             // console.log(queueList); BAKABİLİRİM
             lastMusic = index + 1;
             let name = e.target.parentElement.childNodes[0].childNodes[2].childNodes[0].innerText,
                 artist = e.target.parentElement.childNodes[0].childNodes[2].childNodes[1].innerText;
             getQueueItem(name, artist);
+            localStorage.setItem("queueArr", JSON.stringify(queueArr));
             createQueueItem();
             queueCheck = true;
+            localStorage.setItem("queueCheck", queueCheck);
             popup.style.opacity = "1";
             setTimeout(() => {
                 popup.style.opacity = "0";
@@ -570,4 +609,36 @@ function createSearchResult(song, index) {
             }, 1500);
         }
     });
+}
+
+function getItemsFromLS() {
+    let queueCheckLS = JSON.parse(localStorage.getItem("queueCheck"));
+    if (queueCheckLS) {
+        queueCheck = true;
+        let queueArrLS = JSON.parse(localStorage.getItem("queueArr"));
+        let queueListLS = JSON.parse(localStorage.getItem("queueList"));
+        queueListLS.forEach((index) => {
+            queueList.push(index);
+        });
+        queueArrLS.forEach((name) => {
+            getQueueItem(name[0], name[1]);
+            createQueueItem();
+        });
+    }
+    else {
+        queueCheck = false;
+    }
+}
+
+function getShuffleRepeatLS() {
+    let shuffle = JSON.parse(localStorage.getItem("Shuffle"));
+    let repeat = JSON.parse(localStorage.getItem("Repeat"));
+    if (shuffle) {
+        shuffleBtn.classList.add("is-shuffled");
+        shuffleBtn.setAttribute("title", "Karışık çalmayı kapat.");
+    }
+    if (repeat) {
+        repeatBtn.classList.add("is-repeating");
+        repeatBtn.setAttribute("title", "Tekrarlamayı kapat.");
+    }
 }
