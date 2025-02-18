@@ -481,6 +481,7 @@ h2 {
 
 .toggle-queue-list {
     left: 30px;
+    padding: 0 5px;
 }
 
 .item {
@@ -519,7 +520,6 @@ h2 {
     text-align: left;
     font-size: 14px;
     color: rgba(241, 236, 236, 0.815);
-    ;
 }
 
 #clear-all-queue {
@@ -612,7 +612,16 @@ h2 {
 
 @media (max-width: 500px) {
     .music-list {
-        width: 350px;
+        width: 100%;
+        right: -500px;
+    }
+
+    .search-result {
+        padding: 0 20px;
+    }
+
+    .search-result .music-member {
+        margin-bottom: 1rem;
     }
 
     .search {
@@ -634,15 +643,21 @@ h2 {
     }
 
     .toggle {
-        right: 37px;
+        right: 0px;
     }
 
     .music-list-container {
-        width: 370px;
-        left: -380px;
+        width: 90%;
+        left: -500px;
+    }
+
+    .queue-music-list {
+        width: 100%;
+        /* padding: 0 5px; */
     }
 
     .toggle-queue-list {
-        left: 30px;
+        left: 25px;
+       
     }
 }
