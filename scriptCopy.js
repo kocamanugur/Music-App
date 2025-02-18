@@ -351,6 +351,7 @@ allMusicList.forEach((song, index) => {
         // queueCheck = true;
         musicIndex = index + 1;
         protectIndex = musicIndex;
+        localStorage.removeItem("currentTime");
         loadMusic(musicIndex);
         musicList.classList.toggle("toggle");
         playMusic();
@@ -603,6 +604,7 @@ function createSearchResult(song, index) {
     musicClass.addEventListener("click", () => {
         musicIndex = index + 1;
         protectIndex = musicIndex;
+        localStorage.removeItem("currentTime");
         loadMusic(musicIndex);
         playMusic();
     });
