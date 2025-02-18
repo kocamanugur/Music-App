@@ -415,19 +415,21 @@ let deneme31 = JSON.parse(localStorage.getItem("ses"));
 if (deneme31 != null) {
     volumeSlider.value = deneme31;
 }
+let volumeSliderSave;
 customvolumeSlider();
 volumeSlider.addEventListener("input", customvolumeSlider);
 volumeIcon.addEventListener("click", () => {
     if (music.volume != 0) {
         volumeIcon.innerHTML = '<ion-icon name="volume-mute-outline"></ion-icon>';
+        volumeSliderSave = volumeSlider.value;
         volumeSlider.value = 0;
         music.volume = 0;
         localStorage.setItem("ses", JSON.stringify(volumeSlider.value));
     }
     else {
         volumeIcon.innerHTML = '<ion-icon name="volume-high-outline"></ion-icon>';
-        volumeSlider.value = volumeValue;
-        music.volume = volumeValue / 100;
+        volumeSlider.value = volumeSliderSave;
+        music.volume = volumeSlider.value / 100;
         localStorage.setItem("ses", JSON.stringify(volumeSlider.value));
 
     }
