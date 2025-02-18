@@ -46,6 +46,7 @@ nextButton.addEventListener("click", nextMusic);
 previousButton.addEventListener("click", previousMusic);
 music.addEventListener("timeupdate", (e) => {
     let currentTime = e.target.currentTime;
+    localStorage.setItem("currentTime", JSON.stringify(currentTime));
     let duration = e.target.duration;
     let progressBarWidth = (currentTime / duration) * 100;
     progressBar.style.width = `${progressBarWidth}%`;
@@ -98,6 +99,7 @@ music.addEventListener("ended", () => {
                     queueIndex = 0;
                     queueCheck = false;
                     localStorage.setItem("queueCheck", queueCheck);
+                    localStorage.removeItem("currentTime");
                     loadMusic(musicIndex);
                     playMusic();
                 }
@@ -112,12 +114,14 @@ music.addEventListener("ended", () => {
                     queueIndex = 0;
                     queueCheck = false;
                     localStorage.setItem("queueCheck", queueCheck);
+                    localStorage.removeItem("currentTime");
                     loadMusic(musicIndex);
                     playMusic();
                 }
 
             }
             else {
+                localStorage.removeItem("currentTime");
                 loadMusic(queueList[queueIndex]);
                 musicIndex = queueList[queueIndex];
                 playMusic();
@@ -141,6 +145,7 @@ music.addEventListener("ended", () => {
             randIndex = Math.floor(Math.random() * allMusics.length + 1);
         }
         musicIndex = randIndex;
+        localStorage.removeItem("currentTime");
         loadMusic(musicIndex);
         playMusic();
     }
@@ -209,6 +214,7 @@ function nextMusic() {
                     queueIndex = 0;
                     queueCheck = false;
                     localStorage.setItem("queueCheck", queueCheck);
+                    localStorage.removeItem("currentTime");
                     loadMusic(musicIndex);
                     playMusic();
                 }
@@ -223,12 +229,14 @@ function nextMusic() {
                     queueIndex = 0;
                     queueCheck = false;
                     localStorage.setItem("queueCheck", queueCheck);
+                    localStorage.removeItem("currentTime");
                     loadMusic(musicIndex);
                     playMusic();
                 }
 
             }
             else {
+                localStorage.removeItem("currentTime");
                 loadMusic(queueList[queueIndex]);
                 musicIndex = queueList[queueIndex];
                 playMusic();
@@ -253,6 +261,7 @@ function nextMusic() {
             randIndex = Math.floor(Math.random() * allMusics.length + 1);
         }
         musicIndex = randIndex;
+        localStorage.removeItem("currentTime");
         loadMusic(musicIndex);
         playMusic();
     }
@@ -260,6 +269,7 @@ function nextMusic() {
     else {
         musicIndex++;
         musicIndex > allMusics.length ? musicIndex = 1 : musicIndex = musicIndex;
+        localStorage.removeItem("currentTime");
         loadMusic(musicIndex);
         playMusic();
         protectIndex = musicIndex;
@@ -268,12 +278,14 @@ function nextMusic() {
 
 function previousMusic() {
     if (music.currentTime > 3) {
+        localStorage.removeItem("currentTime");
         music.currentTime = 0;
         playMusic();
     }
     else {
         musicIndex--;
         musicIndex < 1 ? musicIndex = allMusics.length : musicIndex = musicIndex;
+        localStorage.removeItem("currentTime");
         loadMusic(musicIndex);
         playMusic();
     }
@@ -293,6 +305,10 @@ function loadMusic(index) {
         }
         Musicduration.innerHTML = `${totalMin}:${totalSec}`;
     });
+    let currentTimeLS = JSON.parse(localStorage.getItem("currentTime"));
+    if (currentTimeLS != null) {
+        music.currentTime = currentTimeLS;
+    }
 }
 
 
@@ -392,6 +408,11 @@ function customvolumeSlider() {
 
     }
     volumeValue = music.volume * 100;
+    localStorage.setItem("ses", JSON.stringify(volumeSlider.value));
+}
+let deneme31 = JSON.parse(localStorage.getItem("ses"));
+if (deneme31 != null) {
+    volumeSlider.value = deneme31;
 }
 customvolumeSlider();
 volumeSlider.addEventListener("input", customvolumeSlider);
@@ -400,11 +421,14 @@ volumeIcon.addEventListener("click", () => {
         volumeIcon.innerHTML = '<ion-icon name="volume-mute-outline"></ion-icon>';
         volumeSlider.value = 0;
         music.volume = 0;
+        localStorage.setItem("ses", JSON.stringify(volumeSlider.value));
     }
     else {
         volumeIcon.innerHTML = '<ion-icon name="volume-high-outline"></ion-icon>';
         volumeSlider.value = volumeValue;
         music.volume = volumeValue / 100;
+        localStorage.setItem("ses", JSON.stringify(volumeSlider.value));
+
     }
 });
 
